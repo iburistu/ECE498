@@ -1,0 +1,234 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>hw2</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-02-04"><meta name="DC.source" content="hw2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear
+clc
+
+enrollment = [
+<span class="comment">% Year</span>
+1995	1996	1997	1998	1999	2000	2001	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012	2013	2014	2015    2016    2017
+<span class="comment">% UM</span>
+9996	9928	9213	9451	9945	10282	10698	11135	11222	11358	11435	11797	11912	11818	11867	11501	11168	10901	11247	11286   10922   11219    11240
+<span class="comment">% UMA</span>
+6023	5496	5248	5130	5612	5617	5575	5722	5943	5538	5494	5257	5101	4974	5054	5074	4974	4990	4770	4664    4683    4416    4014
+<span class="comment">% UMF</span>
+2510	2512	2446	2507	2479	2413	2435	2395	2420	2349	2452	2424	2265	2227	2238	2322	2269	2179	2061	1960    2016    2000    2080
+<span class="comment">% UMFK</span>
+731	767	690	827	926	886	897	827	924	1076	1193	1339	1269	1102	1126	1073	1080	1169	1209	1327    1559    1904   1760
+<span class="comment">% UMM</span>
+856	915	884	899	908	927	1017	1068	1313	1191	1149	1259	1093	1023	964	951	863	925	892	810     786     745    701
+<span class="comment">% UMPI</span>
+1278	1347	1307	1344	1378	1427	1367	1560	1546	1652	1548	1655	1533	1455	1436	1434	1453	1463	1263	1138    1289    1326   1408
+<span class="comment">% USM</span>
+9721	9966	10230	10462	10645	10820	10966	11382	11007	11089	10974	10478	10453	10009	9655	9654	9301	9385	8923	8428    7739    7855    7794
+];
+
+year = enrollment(1,:);
+um = enrollment(2,:);
+uma = enrollment(3,:);
+umf = enrollment(4,:);
+umfk = enrollment(5,:);
+umm = enrollment(6,:);
+umpi = enrollment(7,:);
+usm = enrollment(8,:);
+
+figure(1)
+bar(year, enrollment([2:8], :)'/10^3, <span class="string">'stacked'</span>)
+grid <span class="string">on</span>;
+xlim([1994 2018]);
+legend(<span class="string">'UM'</span>, <span class="string">'UMA'</span>, <span class="string">'UMF'</span>, <span class="string">'UMFK'</span>, <span class="string">'UMM'</span>, <span class="string">'UMPI'</span>, <span class="string">'USM'</span>, <span class="string">'Location'</span>, <span class="string">'southwest'</span>)
+xlabel(<span class="string">'Year'</span>)
+xticks([1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017])
+ylabel(<span class="string">'Total Enrollment (Thousands)'</span>)
+title(<span class="string">'Enrollment of University of Maine Campuses, 1995 - 2017'</span>)
+
+figure(2)
+umpercent = (um ./ sum(enrollment([2:8], :))) * 100;
+usmpercent = (usm ./ sum(enrollment([2:8], :))) * 100;
+plot(year, umpercent, <span class="string">'--or'</span>, year, usmpercent, <span class="string">':m^'</span>)
+grid <span class="string">on</span>;
+legend(<span class="string">'UM'</span>, <span class="string">'USM'</span>, <span class="string">'Location'</span>, <span class="string">'northwest'</span>)
+xlim([1995 2017]);
+xlabel(<span class="string">'Year'</span>)
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+ylabel(<span class="string">'Percentage of System Total, %'</span>)
+
+figure(3)
+yyaxis <span class="string">left</span>
+b = bar(year, enrollment(2:8, :)'/10^3, <span class="string">'stacked'</span>);
+ylabel(<span class="string">'Total Enrollment (Thousands)'</span>)
+
+yyaxis <span class="string">right</span>
+plot(year, umpercent, <span class="string">'--or'</span>, year, usmpercent, <span class="string">':m^'</span>)
+ylabel(<span class="string">'Percentage of System Total, %'</span>)
+
+legend(<span class="string">'UM'</span>, <span class="string">'UMA'</span>, <span class="string">'UMF'</span>, <span class="string">'UMFK'</span>, <span class="string">'UMM'</span>, <span class="string">'UMPI'</span>, <span class="string">'USM'</span>, <span class="string">'UM'</span>, <span class="string">'USM'</span>, <span class="string">'Location'</span>, <span class="string">'northoutside'</span>, <span class="string">'Orientation'</span>, <span class="string">'horizontal'</span>)
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+
+
+figure(4)
+yyaxis <span class="string">left</span>
+bar(year, um / 10^3, <span class="string">'g'</span>)
+ylim([9 12])
+ylabel(<span class="string">'Enrollment (thousands)'</span>)
+
+yyaxis <span class="string">right</span>
+yoypercent = diff(um);
+diffyear = linspace(1996, 2016, 22);
+plot(diffyear, yoypercent / 100, <span class="string">'--or'</span>)
+ylabel(<span class="string">'Year over Year Growth, %'</span>)
+
+xlim([1994 2017])
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+xlabel(<span class="string">'Year'</span>)
+legend(<span class="string">'UM'</span>, <span class="string">'UM YoY Growth'</span>, <span class="string">'Location'</span>, <span class="string">'northoutside'</span>, <span class="string">'Orientation'</span>, <span class="string">'horizontal'</span>)
+</pre><img vspace="5" hspace="5" src="hw2_01.png" alt=""> <img vspace="5" hspace="5" src="hw2_02.png" alt=""> <img vspace="5" hspace="5" src="hw2_03.png" alt=""> <img vspace="5" hspace="5" src="hw2_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear
+clc
+
+enrollment = [
+% Year	
+1995	1996	1997	1998	1999	2000	2001	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012	2013	2014	2015    2016    2017
+% UM	
+9996	9928	9213	9451	9945	10282	10698	11135	11222	11358	11435	11797	11912	11818	11867	11501	11168	10901	11247	11286   10922   11219    11240
+% UMA	
+6023	5496	5248	5130	5612	5617	5575	5722	5943	5538	5494	5257	5101	4974	5054	5074	4974	4990	4770	4664    4683    4416    4014
+% UMF	
+2510	2512	2446	2507	2479	2413	2435	2395	2420	2349	2452	2424	2265	2227	2238	2322	2269	2179	2061	1960    2016    2000    2080
+% UMFK	
+731	767	690	827	926	886	897	827	924	1076	1193	1339	1269	1102	1126	1073	1080	1169	1209	1327    1559    1904   1760
+% UMM	
+856	915	884	899	908	927	1017	1068	1313	1191	1149	1259	1093	1023	964	951	863	925	892	810     786     745    701
+% UMPI	
+1278	1347	1307	1344	1378	1427	1367	1560	1546	1652	1548	1655	1533	1455	1436	1434	1453	1463	1263	1138    1289    1326   1408
+% USM	
+9721	9966	10230	10462	10645	10820	10966	11382	11007	11089	10974	10478	10453	10009	9655	9654	9301	9385	8923	8428    7739    7855    7794
+];
+
+year = enrollment(1,:);
+um = enrollment(2,:);
+uma = enrollment(3,:);
+umf = enrollment(4,:);
+umfk = enrollment(5,:);
+umm = enrollment(6,:);
+umpi = enrollment(7,:);
+usm = enrollment(8,:);
+
+figure(1)
+bar(year, enrollment([2:8], :)'/10^3, 'stacked')
+grid on;
+xlim([1994 2018]);
+legend('UM', 'UMA', 'UMF', 'UMFK', 'UMM', 'UMPI', 'USM', 'Location', 'southwest')
+xlabel('Year')
+xticks([1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017])
+ylabel('Total Enrollment (Thousands)')
+title('Enrollment of University of Maine Campuses, 1995 - 2017')
+
+figure(2)
+umpercent = (um ./ sum(enrollment([2:8], :))) * 100;
+usmpercent = (usm ./ sum(enrollment([2:8], :))) * 100;
+plot(year, umpercent, 'REPLACE_WITH_DASH_DASHor', year, usmpercent, ':m^')
+grid on;
+legend('UM', 'USM', 'Location', 'northwest')
+xlim([1995 2017]);
+xlabel('Year')
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+ylabel('Percentage of System Total, %')
+
+figure(3)
+yyaxis left
+b = bar(year, enrollment(2:8, :)'/10^3, 'stacked');
+ylabel('Total Enrollment (Thousands)')
+
+yyaxis right
+plot(year, umpercent, 'REPLACE_WITH_DASH_DASHor', year, usmpercent, ':m^')
+ylabel('Percentage of System Total, %')
+
+legend('UM', 'UMA', 'UMF', 'UMFK', 'UMM', 'UMPI', 'USM', 'UM', 'USM', 'Location', 'northoutside', 'Orientation', 'horizontal')
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+
+
+figure(4)
+yyaxis left
+bar(year, um / 10^3, 'g')
+ylim([9 12])
+ylabel('Enrollment (thousands)')
+
+yyaxis right
+yoypercent = diff(um);
+diffyear = linspace(1996, 2016, 22);
+plot(diffyear, yoypercent / 100, 'REPLACE_WITH_DASH_DASHor')
+ylabel('Year over Year Growth, %')
+
+xlim([1994 2017])
+xticks([1996 1998 2000 2002 2004 2006 2008 2010 2012 2014 2016])
+xlabel('Year')
+legend('UM', 'UM YoY Growth', 'Location', 'northoutside', 'Orientation', 'horizontal')
+##### SOURCE END #####
+--></body></html>
