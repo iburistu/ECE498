@@ -1,0 +1,193 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>hw8</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-04-08"><meta name="DC.source" content="hw8.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Zachary Linkletter</span>
+<span class="comment">% ECE 498 HW 8</span>
+<span class="comment">% 4/9/18</span>
+
+clear
+clc
+
+Q1 = dsolve(<span class="string">'Dy = x^2/y'</span>,<span class="string">'x'</span>)
+
+Q2 = dsolve(<span class="string">'Dy + y^2 * sin(x) = 0'</span>, <span class="string">'x'</span>)
+
+Q3 = dsolve(<span class="string">'x * Dy = sqrt(1 - y^2)'</span>,<span class="string">'x'</span>)
+
+f = @(x,y) (-x*y)/sqrt(2 - y^2);
+
+[x,y] = ode45(f, [0 5], 1);
+figure(1);
+plot(x,y)
+grid <span class="string">on</span>;
+title(<span class="string">'Q4'</span>);
+
+[x1,y1] = ode23(<span class="string">'ode'</span>,[0 pi/2], [1 -1 1])
+
+figure(2);
+plot(x1,y1)
+grid <span class="string">on</span>;
+title(<span class="string">'Q5'</span>);
+</pre><pre class="codeoutput"> 
+Q1 =
+ 
+  2^(1/2)*(x^3/3 + C2)^(1/2)
+ -2^(1/2)*(x^3/3 + C2)^(1/2)
+ 
+ 
+Q2 =
+ 
+                0
+ -1/(C5 + cos(x))
+ 
+ 
+Q3 =
+ 
+                1
+               -1
+ sin(C8 + log(x))
+ 
+
+x1 =
+
+         0
+    0.0100
+    0.0600
+    0.1455
+    0.2370
+    0.3369
+    0.4479
+    0.5706
+    0.7023
+    0.8075
+    0.9127
+    0.9789
+    1.0283
+    1.0777
+    1.1378
+    1.2106
+    1.2946
+    1.3893
+    1.4963
+    1.5708
+
+
+y1 =
+
+    1.0000   -1.0000    1.0000
+    1.0710   -1.0816    1.0301
+    1.4550   -1.5393    1.1838
+    2.2286   -2.5075    1.4451
+    3.2227   -3.7854    1.6960
+    4.4903   -5.4157    1.8992
+    6.0906   -7.4337    1.9987
+    8.0208   -9.7722    1.9156
+   10.1700  -12.2140    1.5808
+   11.8542  -13.9738    1.1408
+   13.4408  -15.4686    0.5748
+   14.3658  -16.2454    0.1725
+   15.0127  -16.7367   -0.1423
+   15.6200  -17.1513   -0.4631
+   16.3043  -17.5543   -0.8527
+   17.0554  -17.9035   -1.3084
+   17.8256  -18.1442   -1.7855
+   18.6031  -18.2693   -2.2262
+   19.4316  -18.3435   -2.5520
+   20.0321  -18.4420   -2.6492
+
+</pre><img vspace="5" hspace="5" src="hw8_01.png" alt=""> <img vspace="5" hspace="5" src="hw8_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Zachary Linkletter
+% ECE 498 HW 8
+% 4/9/18
+
+clear
+clc
+
+Q1 = dsolve('Dy = x^2/y','x')
+
+Q2 = dsolve('Dy + y^2 * sin(x) = 0', 'x')
+
+Q3 = dsolve('x * Dy = sqrt(1 - y^2)','x')
+
+f = @(x,y) (-x*y)/sqrt(2 - y^2);
+
+[x,y] = ode45(f, [0 5], 1);
+figure(1);
+plot(x,y)
+grid on;
+title('Q4');
+
+[x1,y1] = ode23('ode',[0 pi/2], [1 -1 1])
+
+figure(2);
+plot(x1,y1)
+grid on;
+title('Q5');
+##### SOURCE END #####
+--></body></html>
